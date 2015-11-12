@@ -2,10 +2,10 @@ import java.lang.Override;
 import java.lang.String;
 
 public class Case{
-    private bool estLibre;
+    private boolean estLibre;
     private String couleur;
 
-    public Case(bool estLibre) {
+    public Case() {
         this.estLibre = true;
         this.couleur = null;
     }
@@ -19,11 +19,11 @@ public class Case{
         }
     }
 
-    public void setEstLibre(bool estLibre) {
+    public void setEstLibre(boolean estLibre) {
         this.estLibre = estLibre;
     }
 
-    public bool getEstLibre() {
+    public boolean getEstLibre() {
         return estLibre;
     }
 
