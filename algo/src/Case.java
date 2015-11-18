@@ -10,13 +10,9 @@ public class Case{
         this.couleur = null;
     }
 
-    public void setCouleur(int couleur) {
-        if (couleur==1) {
-            this.couleur = "Rouge";
-        }
-        else if (couleur ==2){
-            this.couleur = "Bleu";
-        }
+    public void setCouleur(String couleur) {
+
+            this.couleur = couleur;
     }
 
     public void setEstLibre(boolean estLibre) {
