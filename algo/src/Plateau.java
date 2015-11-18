@@ -8,48 +8,84 @@ public class Plateau{
     public Plateau() {
         plateau = new Case[11][11];
         for (int i =0;i<11;++i){
-            for (int j=0;j<11;++j) plateau[i][j] = new Case();
+            for (int j=0;j<11;++j) plateau[i][j] = new Case(i,j);
         }
         _chemins= new ClassUnion();
     }
-    public void ajoutePion(Coup c){
+    public void ajoutePion(Pion c){
         if (plateau[c.x][c.y].getEstLibre()){
             plateau[c.x][c.y].setCouleur(c.couleur);
             if (c.y-1>=0){
                 if(plateau[c.x][c.y-1].getCouleur()==c.couleur){
-                    _chemins.Union(ClassUnion.calculeCase(c.x, c.y), ClassUnion.calculeCase(c.x, c.y - 1));
+                    _chemins.union(ClassUnion.calculeCase(c.x, c.y), ClassUnion.calculeCase(c.x, c.y - 1));
                 }
                 if (c.x+1<11){
                     if(plateau[c.x+1][c.y-1].getCouleur()==c.couleur){
-                        _chemins.Union(ClassUnion.calculeCase(c.x,c.y),ClassUnion.calculeCase(c.x+1,c.y-1));
+                        _chemins.union(ClassUnion.calculeCase(c.x, c.y), ClassUnion.calculeCase(c.x + 1, c.y - 1));
                     }
                 }
             }
             if (c.x-1>=0) {
                 if (plateau[c.x - 1][c.y].getCouleur() == c.couleur) {
-                    _chemins.Union(ClassUnion.calculeCase(c.x, c.y), ClassUnion.calculeCase(c.x - 1, c.y));
+                    _chemins.union(ClassUnion.calculeCase(c.x, c.y), ClassUnion.calculeCase(c.x - 1, c.y));
                 }
             }
             if (c.x+1<11) {
                 if (plateau[c.x +1][c.y].getCouleur() == c.couleur) {
-                        _chemins.Union(ClassUnion.calculeCase(c.x, c.y), ClassUnion.calculeCase(c.x + 1, c.y));
+                        _chemins.union(ClassUnion.calculeCase(c.x, c.y), ClassUnion.calculeCase(c.x + 1, c.y));
                 }
             }
             if (c.y+1<11){
                 if (c.x-1>=0){
                     if(plateau[c.x-1][c.y+1].getCouleur()==c.couleur){
-                        _chemins.Union(ClassUnion.calculeCase(c.x,c.y),ClassUnion.calculeCase(c.x-1,c.y+1));
+                        _chemins.union(ClassUnion.calculeCase(c.x, c.y), ClassUnion.calculeCase(c.x - 1, c.y + 1));
                     }
                 }
                 if(plateau[c.x][c.y+1].getCouleur()==c.couleur){
-                    _chemins.Union(ClassUnion.calculeCase(c.x, c.y), ClassUnion.calculeCase(c.x, c.y + 1));
+                    _chemins.union(ClassUnion.calculeCase(c.x, c.y), ClassUnion.calculeCase(c.x, c.y + 1));
                 }
             }
 
         }
         System.out.println(this.toString());
+        this.afficheComposante(c);
     }
-    @Override
+
+
+    public boolean existeCheminCase(Case a,Case b){
+        if (_chemins.classe(ClassUnion.calculeCase(a.getPosX(),a.getPosY())).getValue()==_chemins.classe(ClassUnion.calculeCase(b.getPosX(),b.getPosY())).getValue())return true;
+        else return false;
+
+    }
+    public void afficheComposante(Pion p){
+        int a = ClassUnion.calculeCase(p.x,p.y);
+        String s = _chemins.ensemble(a);
+        System.out.println(s);
+    }
+    public boolean existeCheminCotes(String couleur){
+        boolean trouve =false;
+        if(couleur=="Rouge"){
+            for (int i=0;i<11;++i){
+                for (int j=0;j<11;++j){
+                    if (existeCheminCase(plateau[0][i],plateau[10][j])) trouve =true;
+                }
+            }
+        }
+        else if(couleur=="Bleu"){
+            for (int i=0;i<11;++i){
+                for (int j=0;j<11;++j){
+                    if (existeCheminCase(plateau[i][0],plateau[j][10])) trouve =true;
+                }
+            }
+        }
+        return trouve;
+    }
+    /*public boolean relieComposantes(Pion p){
+        if (p)
+    }*/
+    public Case[][] getPlateau() {
+        return plateau;
+    }
     public String toString() {
         char[] values = {'A','B','C','D','E','F','G','H','I','J','K'};
         String s=" ";

@@ -23,6 +23,6 @@ public class Joueur {
         System.out.println("Veuillez saisir l'identifiant de la colonne a jouer :");
         sc = new Scanner(System.in);
         String strY = sc.nextLine();
-        _plateau.ajoutePion(new Coup(strX,strY,this._couleur));
+        _plateau.ajoutePion(new Pion(strX,strY,this._couleur));
     }
 }

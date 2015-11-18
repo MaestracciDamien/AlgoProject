@@ -1,12 +1,18 @@
 /**
  * Created by E133641M on 18/11/15.
  */
-public class Coup {
+public class Pion{
     public int x;
     public int y;
     public String couleur;
 
-    public Coup(int x,String y,String c) {
+    public Pion(int x, int y, String couleur) {
+        this.x = x;
+        this.y = y;
+        this.couleur = couleur;
+    }
+
+    public Pion(int x, String y, String c) {
         this.x = x-1;
         switch (y.charAt(0)){
             case 'A':

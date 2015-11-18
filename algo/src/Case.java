@@ -4,10 +4,22 @@ import java.lang.String;
 public class Case{
     private boolean estLibre;
     private String couleur;
+    private int posX;
+    private int posY;
 
-    public Case() {
+    public Case(int x,int y) {
         this.estLibre = true;
         this.couleur = null;
+        this.posX=x;
+        this.posY=y;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
     }
 
     public void setCouleur(String couleur) {

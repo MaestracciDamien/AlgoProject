@@ -2,29 +2,61 @@
  * Created by E133641M on 18/11/15.
  */
 public class ClassUnion {
-    private int [] _tabParents;
+    private Arbre [] foret;
+
+
 
     public ClassUnion() {
-        this._tabParents = new int [121];
+        this.foret = new Arbre [121];
         for (int i=0;i<121;++i){
-            _tabParents[i]=-1;
+            foret[i]= this.creer(i);
         }
     }
 
-    public void Union(int a, int b){
-        _tabParents[b]=a;
+    public Arbre creer(int x){
+        Arbre a = new Arbre();
+        a.setParent(a);
+        a.setRang(0);
+        a.setValue(x);
+        return a;
+    }
+
+    public void union(int a, int b){
+        Arbre racineA = this.classe(a);
+        Arbre racineB = this.classe(b);
+        if( racineA.getValue()==racineB.getValue());
+        else if (racineA.getRang()<racineB.getRang()){
+            racineA.setParent(racineB);
+        }
+        else if (racineA.getRang()>racineB.getRang()){
+            racineB.setParent(racineA);
+        }
+        else{
+            racineB.setParent(racineA);
+            racineA.setRang(racineA.getRang()+1);
+        }
+
+
+    }
+    public String ensemble(int x){
+        Arbre a = classe(x);
+        String s="{";
+        for(int i=0;i<121;++i){
+            if (foret[i].getParent().getValue()==a.getValue()){
+                s+=Integer.toString(i)+", ";
+            }
+        }
+        s+="}";
+        return s;
+    }
+    public Arbre classe(int x){
+        if (foret[x].getParent().getValue() != foret[x].getValue()){
+            foret[x].setParent(this.classe(foret[x].getParent().getValue()));
+        }
+        return foret[x].getParent();
     }
     public static int calculeCase(int a, int b){
         return a*11+b;
     }
-    public int Class (int a){
-        int found = -1;
-        while (found == -1){
-            if (_tabParents[a]== -1){
-                found =a;
-            }
-            else a= _tabParents[a];
-        }
-        return found;
-    }
+
 }
