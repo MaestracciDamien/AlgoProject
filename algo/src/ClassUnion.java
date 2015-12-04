@@ -55,8 +55,6 @@ public class ClassUnion {
         }
         return foret[x].getParent();
     }
-    public static int calculeCase(int a, int b){
-        return a*11+b;
-    }
+
 
 }

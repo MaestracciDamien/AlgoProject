@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 
 public class Joueur {
-    private Plateau _plateau;
-    private String _couleur;
-    private String _nom;
+    protected Plateau _plateau;
+    protected String _couleur;
+    protected String _nom;
 
     public Joueur(Plateau p,String couleur,String n) {
         _plateau = p;
@@ -24,5 +24,16 @@ public class Joueur {
         sc = new Scanner(System.in);
         String strY = sc.nextLine();
         _plateau.ajoutePion(new Pion(strX,strY,this._couleur));
+    }
+
+    public String get_couleur() {
+        return _couleur;
+    }
+
+    public void set_couleur(String _couleur) {
+        this._couleur = _couleur;
+    }
+    public void messageVictoire(){
+        String s =this._nom+" a gagné";
     }
 }
